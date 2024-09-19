@@ -3,7 +3,7 @@ en:
   extension.broadcast.setGroup: set broadcast group [ID]
   extension.broadcast.send: broadcast message [MESSAGE]
   extension.broadcast.sendName: broadcast named [NAME] message [MESSAGE]
-  extension.broadcast.whenReceived: when I receive message [MESSAGE]
+  extension.broadcast.whenReceived: when I receive message
   extension.broadcast.whenReceivedNamed: when I receive named [NAME] message [MESSAGE]
   extension.broadcast.message: hello
   extension.broadcast.messageName: say

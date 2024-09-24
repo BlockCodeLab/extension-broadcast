@@ -6,7 +6,7 @@ export default {
   description: 'Connecting the world.',
   image: featureImage,
   icon: iconImage,
-  tags: ['blocks', 'arcade', 'popsicle'],
+  tags: ['blocks', 'espnow'],
 
   // l10n
   translations: {

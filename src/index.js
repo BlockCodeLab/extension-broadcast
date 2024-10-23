@@ -1,5 +1,5 @@
 import featureImage from './feature.png';
-import iconImage from './icon.svg';
+import iconImage from './icon.png';
 
 export default {
   name: 'ESPNOW Broadcast',

@@ -1,6 +1,6 @@
 import { Text } from '@blockcode/ui';
 import translations from './l10n.yaml';
-import iconURI from './icon.svg';
+import iconURI from './icon.png';
 import broadcastPyURI from './broadcast.py';
 
 export default {

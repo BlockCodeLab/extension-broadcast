@@ -6,7 +6,7 @@ export default {
   description: 'Broadcast the messages via the ESPNOW.',
   image: featureImage,
   icon: iconImage,
-  tags: ['blocks', 'espnow'],
+  tags: ['blocks', 'communication', 'data'],
 
   // l10n
   translations: {

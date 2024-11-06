@@ -257,7 +257,6 @@ export default {
   menus: {
     receivedParam: {
       type: 'string',
-      default: 'timestamp',
       items: [
         [
           <Text

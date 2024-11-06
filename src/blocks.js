@@ -20,32 +20,6 @@ export default {
   ],
   blocks: [
     {
-      id: 'setGroup',
-      text: (
-        <Text
-          id="extension.broadcast.setGroup"
-          defaultMessage="set broadcast group [ID]"
-        />
-      ),
-      inputs: {
-        ID: {
-          type: 'number',
-          default: 1,
-        },
-      },
-      python(block) {
-        this.definitions_['import_extension_broadcast'] = 'from extensions.broadcast import broadcast';
-        let code = '';
-        if (this.STATEMENT_PREFIX) {
-          code += this.injectId(this.STATEMENT_PREFIX, block);
-        }
-        const id = this.valueToCode(block, 'ID', this.ORDER_NONE) || 1;
-        code += `broadcast.set_group(num(${id}))\n`;
-        return code;
-      },
-    },
-    '---',
-    {
       id: 'whenReceived',
       text: (
         <Text
@@ -86,7 +60,7 @@ export default {
           code += this.injectId(this.STATEMENT_PREFIX, block);
         }
         const message = this.valueToCode(block, 'MESSAGE', this.ORDER_NONE) || '""';
-        code += `broadcast.send(str(${message}))\n`;
+        code += `broadcast.send(str(${message.replace(':', '_')}))\n`;
         return code;
       },
     },
@@ -209,29 +183,12 @@ export default {
           defaultMessage="received message [INDEX]"
         />
       ),
-      output: 'number',
       inputs: {
         INDEX: {
-          type: 'string',
-          default: 'timestamp',
-          menu: [
-            [
-              <Text
-                id="extension.broadcast.receivedTime"
-                defaultMessage=""
-              />,
-              'timestamp',
-            ],
-            [
-              <Text
-                id="extension.broadcast.receivedSerial"
-                defaultMessage=""
-              />,
-              'serialnumber',
-            ],
-          ],
+          menu: 'receivedParam',
         },
       },
+      output: 'string',
       python(block) {
         this.definitions_['import_extension_broadcast'] = 'from extensions.broadcast import broadcast';
         const index = this.quote_(block.getFieldValue('INDEX') || 'timestamp');
@@ -247,7 +204,6 @@ export default {
           defaultMessage="received named [NAME] message [INDEX]"
         />
       ),
-      output: 'number',
       inputs: {
         NAME: {
           type: 'text',
@@ -259,26 +215,10 @@ export default {
           ),
         },
         INDEX: {
-          type: 'string',
-          default: 'timestamp',
-          menu: [
-            [
-              <Text
-                id="extension.broadcast.receivedTime"
-                defaultMessage=""
-              />,
-              'timestamp',
-            ],
-            [
-              <Text
-                id="extension.broadcast.receivedSerial"
-                defaultMessage=""
-              />,
-              'serialnumber',
-            ],
-          ],
+          menu: 'receivedParam',
         },
       },
+      output: 'string',
       python(block) {
         this.definitions_['import_extension_broadcast'] = 'from extensions.broadcast import broadcast';
         const name = this.valueToCode(block, 'NAME', this.ORDER_NONE) || '"default"';
@@ -287,6 +227,61 @@ export default {
         return [code, this.ORDER_FUNCTION_CALL];
       },
     },
+    '---',
+    {
+      id: 'setGroup',
+      text: (
+        <Text
+          id="extension.broadcast.setGroup"
+          defaultMessage="set broadcast group [ID]"
+        />
+      ),
+      inputs: {
+        ID: {
+          type: 'string',
+          default: '1',
+        },
+      },
+      python(block) {
+        this.definitions_['import_extension_broadcast'] = 'from extensions.broadcast import broadcast';
+        let code = '';
+        if (this.STATEMENT_PREFIX) {
+          code += this.injectId(this.STATEMENT_PREFIX, block);
+        }
+        const id = this.valueToCode(block, 'ID', this.ORDER_NONE) || '1';
+        code += `broadcast.set_group(str(${id}))\n`;
+        return code;
+      },
+    },
   ],
+  menus: {
+    receivedParam: {
+      type: 'string',
+      default: 'timestamp',
+      items: [
+        [
+          <Text
+            id="extension.broadcast.receivedTime"
+            defaultMessage="timestamp"
+          />,
+          'timestamp',
+        ],
+        [
+          <Text
+            id="extension.broadcast.receivedSerial"
+            defaultMessage="serial number"
+          />,
+          'serialnumber',
+        ],
+        [
+          <Text
+            id="extension.broadcast.receivedMac"
+            defaultMessage="mac"
+          />,
+          'mac',
+        ],
+      ],
+    },
+  },
   translations,
 };

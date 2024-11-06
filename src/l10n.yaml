@@ -11,12 +11,13 @@ en:
   extension.broadcast.receivedNamed: received named [NAME] message
   extension.broadcast.receivedIndex: received message [INDEX]
   extension.broadcast.receivedNameIndex: received named [NAME] message [INDEX]
+  extension.broadcast.receivedMac: mac address
   extension.broadcast.receivedTime: timestamp
   extension.broadcast.receivedSerial: serial number
 
 zh-Hans:
   extension.broadcast.name: 无线广播
-  extension.broadcast.setGroup: 将广播组号设为 [ID]
+  extension.broadcast.setGroup: 将广播组设为 [ID]
   extension.broadcast.send: 广播消息 [MESSAGE]
   extension.broadcast.sendName: 广播命名为 [NAME] 的消息 [MESSAGE]
   extension.broadcast.whenReceived: 当接收到消息
@@ -27,5 +28,6 @@ zh-Hans:
   extension.broadcast.receivedNamed: 命名为 [NAME] 的消息
   extension.broadcast.receivedIndex: 消息的 [INDEX]
   extension.broadcast.receivedNameIndex: 命名为 [NAME] 消息的 [INDEX]
+  extension.broadcast.receivedMac: MAC 地址
   extension.broadcast.receivedTime: 时间戳
   extension.broadcast.receivedSerial: 序列号

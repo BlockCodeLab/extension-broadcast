@@ -8,7 +8,9 @@ PING = bytes("PING", "utf-8")
 RECEIVE_MESSAGE = "RECEIVE_MESSAGE"
 
 running = False
-broadcast_group = "1"
+options = {
+    "group": "1",
+}
 received = {}
 
 
@@ -40,7 +42,7 @@ async def server(e):
                 group, name, value = kv
             elif len(kv) == 2:
                 group, value = kv
-            if broadcast_group == group:
+            if options["group"] == group:
                 received.setdefault(name, {"serialnumber": 0})
                 received[name]["mac"] = mac
                 received[name]["value"] = value
@@ -82,12 +84,11 @@ async def send_raw(msg):
 
 
 def send(msg, name="default"):
-    asyncio.create_task(send_raw(bytes(f"{broadcast_group}:{name}:{msg}", "utf-8")))
+    asyncio.create_task(send_raw(bytes(f"{options["group"]}:{name}:{msg}", "utf-8")))
 
 
 def set_group(value):
-    global broadcast_group
-    broadcast_group = str(value)
+    options["group"] = str(value)
 
 
 def when_received(name, target):

@@ -30,7 +30,7 @@ export default {
       hat: true,
       python() {
         this.definitions_['import_extension_broadcast'] = 'from extensions.broadcast import broadcast';
-        const eventCode = this.eventToCode('broadcast_received', 'target');
+        const eventCode = this.eventToCode('broadcast_received', 'False', 'target');
         return `@broadcast.when_received("default", target)\n${eventCode}`;
       },
     },
@@ -102,7 +102,7 @@ export default {
       },
       python(block) {
         this.definitions_['import_extension_broadcast'] = 'from extensions.broadcast import broadcast';
-        const eventCode = this.eventToCode('broadcast_received', 'target');
+        const eventCode = this.eventToCode('broadcast_received', 'False', 'target');
         const name = this.valueToCode(block, 'NAME', this.ORDER_NONE) || '"default"';
         return `@broadcast.when_received(str(${name}), target)\n${eventCode}`;
       },
